@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Ok!Plate</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="main">
+<h1>OK!PLATE</h1><br/>
+<hr>
+<form id="uploadimage" action="/upload" method="post" enctype="multipart/form-data">
+<div id="image_preview"><img id="previewing" src=".\images\NoImage.jpg" /></div>
+<hr id="line">
+<div id="selectImage">
+<label>Select Your Image</label><br/>
+<input type="file" name="file" id="file" required />
+<input type="submit" value="Upload" class="submit" />
+</div>
+</form>
+</div>
+<h4 id='loading' >loading..</h4>
+<div id="message"></div>
+</body>
+</html>
