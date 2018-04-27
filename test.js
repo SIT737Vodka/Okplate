@@ -13,12 +13,12 @@ const puppeteer = require('puppeteer');
     
         const result = await page.evaluate(() => {
             let data = []; // Create an empty array that will store our data
-            let elements = document.querySelectorAll('.detail-module-content'); 
+            let elements = document.querySelectorAll('.detail-module-content'); //Selects all Vehicle Details
     
-            for (var element of elements){ // Loop through each proudct
-                let Status = element.childNodes[3].innerText; // Select the Status and Expiry Date
-                let Vehicle = element.childNodes[5].innerText; // Select the Vehicle
-                let VIN = element.childNodes[7].innerText; // Select the VIN
+            for (var element of elements){ // Loop through each Vehicle Detail
+                let Status = element.childNodes[3].children[1].innerText; // Select the Status and Expiry Date
+                let Vehicle = element.childNodes[5].children[1].innerText; // Select the Vehicle
+                let VIN = element.childNodes[7].children[1].innerText; // Select the VIN
     
                 data.push({Status,Vehicle,VIN}); // Push an object with the data onto our array
             }
@@ -30,6 +30,11 @@ const puppeteer = require('puppeteer');
         return result; // Return the data
     };
 
-    scrape().then((value) => {
-          console.log(value); // Success!
+    scrape().then((Value) => {
+        
+    //    if (Value == '') {
+           // console.log('Does not exist');
+      //  } else { 
+            console.log(Value[0]); // Success!
+       // }
 });
