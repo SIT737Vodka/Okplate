@@ -18,11 +18,12 @@ const puppeteer = require('puppeteer');
 
     
             for (var element of elements){ // Loop through each Vehicle Detail
+                let RegoNo = element.childNodes[1].children[1].innerText; // Select the Regno
                 let Status = element.childNodes[3].children[1].innerText; // Select the Status and Expiry Date
                 let Vehicle = element.childNodes[5].children[1].innerText; // Select the Vehicle
-                let VIN = element.childNodes[7].children[1].innerText; // Select the VIN
+                let Vin = element.childNodes[7].children[1].innerText; // Select the VIN
     
-                data.push({Status,Vehicle,VIN}); // Push an object with the data onto our array
+                data.push({RegoNo,Status,Vehicle,Vin}); // Push an object with the data onto our array
             }
     
             return data; // Return our data arraylet strValue = JSON.stringify(Value[0]);
@@ -42,22 +43,47 @@ const puppeteer = require('puppeteer');
         else{
             let strValue = JSON.stringify(Value[0]);
             let jsonValue = JSON.parse(strValue);
+            
+            let strRegoNo = JSON.stringify(jsonValue.RegoNo);
             let strStatus = JSON.stringify(jsonValue.Status);
+            let strVehicle = JSON.stringify(jsonValue.Vehicle);
+            let strVin = JSON.stringify(jsonValue.Vin);
 
          if (strStatus.includes('Current') == true) { 
+    
             console.log('Active');
-            console.log(strValue);         
+            
+            console.log(strRegoNo);
+            console.log(strStatus);
+            console.log(strVehicle);
+            console.log(strVin);   
+
         }else if (strStatus.includes('Cancelled') == true){
+           
             console.log('Cancelled');  
-            console.log(strValue); 
+
+            console.log(strRegoNo);
+            console.log(strStatus);
+            console.log(strVehicle);
+            console.log(strVin);   
         }
 		else if (strStatus.includes('Expired') == true){
+            
            console.log('Expired');  
-            console.log(strValue); 
+           
+           console.log(strRegoNo);
+           console.log(strStatus);
+           console.log(strVehicle);
+           console.log(strVin);   
         }
 		else if (strStatus.includes('Suspended') == true){
+
             console.log('Suspended');  
-            console.log(strValue); 
+            
+            console.log(strRegoNo);
+            console.log(strStatus);
+            console.log(strVehicle);
+            console.log(strVin);  
         }
     }
 });
