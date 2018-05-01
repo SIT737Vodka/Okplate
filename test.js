@@ -6,10 +6,10 @@ const puppeteer = require('puppeteer');
         const page = await browser.newPage();
     
         await page.goto('https://www.vicroads.vic.gov.au/registration/buy-sell-or-transfer-a-vehicle/buy-a-vehicle/check-vehicle-registration/vehicle-registration-enquiry?utm_source=VR-checkrego&utm_medium=button&utm_campaign=VR-checkrego');
-        await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",'AOI190');
+        await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",'USB373');
        // await page.waitFor(10000);
         await page.click("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_btnSearch"); // Click the search button to submit
-        await page.waitFor(1000);
+        await page.waitFor(15000);
     
         const result = await page.evaluate(() => {
             let data = []; // Create an empty array that will store our data
@@ -32,9 +32,18 @@ const puppeteer = require('puppeteer');
 
     scrape().then((Value) => {
         
-    //    if (Value == '') {
-           // console.log('Does not exist');
-      //  } else { 
-            console.log(Value[0]); // Success!
-       // }
+        var strValue = JSON.stringify(Value[0]);
+        var jsonValue = JSON.parse(strValue);
+
+        var strStatus = JSON.stringify(jsonValue.Status);
+
+      if (Value == '') {
+           console.log('Does not exist');
+        } else if (strStatus.includes('Current') == true) { 
+            console.log('Active');
+            console.log(strValue);         
+        } else if (strStatus.includes('Cancelled') == true){
+            console.log('Cancelled');  
+            console.log(strValue); 
+        }
 });
