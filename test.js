@@ -46,4 +46,12 @@ const puppeteer = require('puppeteer');
             console.log('Cancelled');  
             console.log(strValue); 
         }
+		else if (strStatus.includes('Expired') == true){
+            console.log('Expired');  
+            console.log(strValue); 
+        }
+		else if (strStatus.includes('Suspended') == true){
+            console.log('Suspended');  
+            console.log(strValue); 
+        }
 });
