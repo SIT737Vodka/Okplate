@@ -42,10 +42,12 @@ app.post('/upload', multipartMiddleware, function(req, res) {
           if( result.info.ocr.adv_ocr.status === "complete" ) {
        
         // API returns rego in JSON 
-      let regoraw = `${result.info.ocr.adv_ocr.data[0].textAnnotations[0].description}`;
+          let regoraw = `${result.info.ocr.adv_ocr.data[0].textAnnotations[0].description}`; 
           console.log(regoraw);
           let rego = regoraw.replace(/\s/g, ''); //remove spaces from string to bypass vicroad validation
           console.log(rego);
+          let regno = rego.substring(0,6);
+          console.log(regno);
           
           // Puppeteer for automation and scrapping of data from Vicroads 
           let scrape = async () => {
@@ -53,7 +55,7 @@ app.post('/upload', multipartMiddleware, function(req, res) {
             const page = await browser.newPage();
         
             await page.goto('https://www.vicroads.vic.gov.au/registration/buy-sell-or-transfer-a-vehicle/buy-a-vehicle/check-vehicle-registration/vehicle-registration-enquiry?utm_source=VR-checkrego&utm_medium=button&utm_campaign=VR-checkrego',{waitUntil: 'networkidle2'});
-            await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",rego);
+            await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",regno);
             await page.click("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_btnSearch"); // Click the search button to submit
             await page.waitForNavigation({timeout: 0,waitUntil: 'networkidle0',})
         
@@ -129,9 +131,10 @@ app.post('/upload', multipartMiddleware, function(req, res) {
         }
        
       });
+
+
  
   });
-  
   
   
   //start the app and listen to the port
