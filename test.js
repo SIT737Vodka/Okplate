@@ -7,9 +7,14 @@ const puppeteer = require('puppeteer');
         const page = await browser.newPage();
     
         await page.goto('https://www.vicroads.vic.gov.au/registration/buy-sell-or-transfer-a-vehicle/buy-a-vehicle/check-vehicle-registration/vehicle-registration-enquiry?utm_source=VR-checkrego&utm_medium=button&utm_campaign=VR-checkrego',{waitUntil: 'networkidle2'});
-        await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",'ABC123');
+        await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",'ABC');
+        try {
         await page.click("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_btnSearch"); // Click the search button to submit
-        await page.waitForNavigation({timeout: 0,waitUntil: 'networkidle0',})
+        await page.waitForNavigation({timeout: 5000,waitUntil: 'networkidle0',});
+    }
+        catch(error){   
+        console.log('timed out');
+    }
 
         const result = await page.evaluate(() => {
            
