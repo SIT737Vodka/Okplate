@@ -85,7 +85,11 @@
 				<hr>
 				<div class="w3-cell-row">
 				  <div class="w3-cell w3-container">
-					<h2>OKPlate! Subscriber login</h2>
+					<h2>OKPlate! Subscriber login&nbsp;&nbsp;
+						<% if (message.length > 0) { %>
+						<span style="color:red"><i><%= message %></i></span>
+						<% } %>
+					</h2>
 					<br>
 					<form action='/login' method='post'>               
 					<div class='form-group'>
