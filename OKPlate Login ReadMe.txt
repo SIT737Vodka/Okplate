@@ -6,6 +6,7 @@ The following commands were used to setup / configure MySQL and create the web-s
 4. To test scipts ran localhost:3000/Login
 Note: To test the site need to rename OKPlateHome.html to index.html and change href links of OKPlateLogin.html in page to cloud/Github destination.
 5. Ran the following commands to setup the users table.
+6. If running in a new node instance need to run "npm install mysql" and "npm install ejs"
 
 mysql -u root -p
 

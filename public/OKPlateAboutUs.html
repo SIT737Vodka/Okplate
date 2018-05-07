@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>OKPlate!</title>
+		<meta name="author" content="OKPlate">
+		<meta name="description" content="Plate Validation">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="OKPlate.css">
+		<link rel="stylesheet" type="text/css" href="OKPlateMob1.css">
+		<link rel="stylesheet" type="text/css" href="OKPlateMob.css">
+	</head>
+    <body>	
+		<div id="wrapper">	
+			<div class="row">
+				<div class="col-md-2">
+					<br>
+					<a href="OKPlateHome.html">
+						<img src="validPlate.jpg" alt="OKPlate Logo" width="220" height="110" class="w3-padding-12">
+					</a>
+				</div>
+				<div class="col-md-10">
+					<header>
+						<span class="OKPlate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OKPlate!</span> <span class="OKPlateSlogan">&nbsp;online plate validation .....</span>
+					</header>
+				</div>
+		 <nav>
+		 <br>
+		 <div class="container">
+		  	 <div class="row">
+				 <div class="col-md-2">
+					 <div class="dropdown">
+						 <button class="dropbtn">&nbsp;Validation</button>
+						 <div class="dropdown-content">
+							 <a href="OKPlateCaptureValidate.html">Capture & Validate Plate (Subscriber)</a>
+							 <a href="OKPlateUploadValidate.html">Upload & Validate Plate (Subscriber)</a>
+							 <a href="OKPlateValidate.html">Validate Plate (Public)</a>							 
+						 </div>
+					 </div>
+				 </div>				 
+				 <div class="col-md-2">
+					 <div class="dropdown">
+						 <button class="dropbtn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Links&nbsp;&nbsp;&nbsp;&nbsp;</button>
+						 <div class="dropdown-content">
+							 <a href="OKPlateLinks.html">VicRoads - Vehicle Check</a>
+							 <a href="OKPlateLinks.html#">PPSR - Personal Property Securities Register</a>
+						 </div>
+					 </div>
+				 </div>	
+				 <div class="col-md-2">
+					 <div class="dropdown">
+					 	 <button class="dropbtn">&nbsp;&nbsp;About&nbsp;Us&nbsp;</button>
+						 <div class="dropdown-content">
+						 	 <a href="OKPlateAboutUs.html">About Us</a>
+							 <a href="OKPlateAboutUs.html">Subscriber vs Public</a>
+							 <a href="OKPlateAboutUs.html">OKPlate! Results</a>
+							 <a href="OKPlateAboutUs.html">Terms and Conditions</a>
+						 </div>
+					 </div>
+				 </div>	
+				 <div class="col-md-2">
+					 <div class="dropdown">
+					 	 <button class="dropbtn">&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</button>
+						 <div class="dropdown-content">
+						 	 <a href="OKPlateLogin.html">Login</a>
+							 <a href="OKPlateLogin.html">Logoff</a>
+						 </div>
+					 </div>
+				 </div>					 
+				 <div class="col-md-2">
+				 </div>
+			 </div>
+		 </div>
+	  	 <br>
+         </nav>
+         <main>
+		 <div class="container">
+			<div class="w3-container">
+			<hr>
+			<div class="w3-cell-row">
+			  <div class="w3-cell w3-container">
+				<h2>About US</h2>
+				<br>
+				<p>OKPlate is an online app that provides online validation of Victorian number plates.</p>
+			  </div>
+			</div>  
+			<hr>
+			<div class="w3-cell-row">
+			  <div class="w3-cell w3-container">
+				<h2>Subscriber vs Public</h2>
+				<br>
+				<p>Subscribers can use OKPlate! to capture the image of a plate or upload an existing plate image, then automatically determine the number and validate.</p>
+				<p>Public users can manually enter a plate number into OKPlate! to validate the number.</p>
+				<br>
+				<p>To subscribe to OKPlate! contact our friendly staff at <u>OKPlate!@deakin.edu.au</u></p>
+			  </div>
+			 </div>  
+			<hr>
+			<div class="w3-cell-row">
+			  <div class="w3-cell w3-container">
+				<h2>OKPlate! Results</h2>
+				<br>
+				<p>One of the following validation results will be provided:</p>
+			  <ul style="list-style-type:square">
+				<li>
+					<p>VALID - The entered or captured plate is a valid plate number</p>
+					<img src="validPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-16">
+				</li>
+				<li>
+					<p>INVALID - The entered or captured plate does not exist</p>
+					<img src="plateNotFound.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-16">
+				</li>
+				<li>
+					<p>INVALID - The entered or captured plate has been recorded as Stolen - contact authorities </p>
+					<img src="stolenPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-16">
+				</li>
+				<li>
+					<p>INVALID - The entered or catptured plate exists but is attached to the Wrong Car (different registration)</p>
+					<img src="plateWrongCar.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-16">
+					<p>Note: This feature is avaiable only when the car and plate image is uploaded or captured and the system can detect the car make</p>
+				</li>
+				</ul>
+			  </div>
+			</div>
+			<hr>
+			<div class="w3-cell-row">
+			  <div class="w3-cell w3-container">
+				<h2>Terms and Conditions</h2>
+				<br>
+				<p>OKPlate! has been created as part of a university subject and is not intended to be used in a commercial arrangement.</p>
+				<p>All information sourced is from public services/sites.  No intention is made to distrust other enterprises.</p>
+				<p>All feedback is welcome! - OKPlate!@deakin.com.au</p>
+				<br>
+			  </div>
+			  
+			</div>  
+			<hr>
+			</div>
+		</div>
+	 	 </main>
+		 <footer>
+			<br>
+			<h4><b>&nbsp;&nbsp;Copyright &copy; 2018 OKPlate!</b></h4>
+			<br>
+		 </footer>
+		 </div>
+	  </div>
+	</body>
+</html>

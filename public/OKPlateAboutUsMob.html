@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<title>OKPlate! Mobile Site</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3mobile.css"> -->
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="OKPlateMob1.css">
+<link rel="stylesheet" type="text/css" href="OKPlateMob.css">
+
+<body style="max-width:600px">
+
+<nav class="w3-sidebar w3-bar-block w3-card" id="mySidebar">
+<div class="w3-container w3-theme-d2">
+  <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-small"><sup class="w3-tiny">close</sup></span>
+  <div class="w3-padding-small">
+  <img src="plateMenu.jpg" alt="OKPlate Logo" style="width:65%" >
+  </div>
+</div>
+<a class="w3-bar-item w3-button" href="http://www.deakin.edu.au/~rmcgann/SIT737/OKPlateCaptureValidateMob.html">Capture & Validate Plate <i>(Subscriber)</i></a>
+<a class="w3-bar-item w3-button" href="http://www.deakin.edu.au/~rmcgann/SIT737/OKPlateUploadValidateMob.html">Upload & Validate Plate <i>(Subscriber)</i></a>
+<a class="w3-bar-item w3-button" href="http://www.deakin.edu.au/~rmcgann/SIT737/OKPlateValidateMob.html">Validate Plate <i>(Public)</i></a>
+<a class="w3-bar-item w3-button" href="http://www.deakin.edu.au/~rmcgann/SIT737/OKPlateLinksMob.html">Links</a>
+<a class="w3-bar-item w3-button" href="http://www.deakin.edu.au/~rmcgann/SIT737/OKPlateAboutUsMob.html">About Us</a>
+<a class="w3-bar-item w3-button" href="http://www.deakin.edu.au/~rmcgann/SIT737/OKPlateLoginMob.html">Login</a>
+</nav>
+
+<header class="w3-bar w3-card w3-theme">
+  <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+  <a href="http://www.deakin.edu.au/~rmcgann/SIT737/OKPlateHomeMob.html"> 
+  <img src="validPlate.jpg" alt="OKPlate Logo" style="width:30%"; class="w3-padding-16">
+  </a>
+  <h1 class="w3-bar-item">OKPlate!</h1>
+  <sup class="w3-bar-item">&nbsp;online plate validation</sup> 
+</header>
+
+<div class="w3-container">
+<hr>
+<div class="w3-cell-row">
+  <div class="w3-cell w3-container">
+	<h3>About US</h3>
+	<p>OKPlate is an online app that provides online validation of Victorian number plates.</p>
+  </div>
+</div>  
+<hr>
+<div class="w3-cell-row">
+  <div class="w3-cell w3-container">
+	<h3>Subscriber vs Public</h3>
+	<p>Subscribers can use OKPlate! to capture the image of a plate or upload an existing plate image, then automatically determine the number and validate.</p>
+	<p>Public users can manually enter a plate number into OKPlate! to validate the number.</p>
+	<br>
+	<p>To subscribe to OKPlate! contact our friendly staff at <u>OKPlate!@deakin.edu.au</u></p>
+  </div>
+ </div>  
+<hr>
+<div class="w3-cell-row">
+  <div class="w3-cell w3-container">
+	<h3>OKPlate! Results</h3>
+	<p>One of the following validation results will be provided:</p>
+  <ul style="list-style-type:square">
+	<li>
+		<p>VALID - The entered or captured plate is a valid plate number</p>
+		<img src="validPlate.jpg" alt="OKPlate Logo" style="width:30%"; class="w3-padding-16">
+	</li>
+	<li>
+		<p>INVALID - The entered or captured plate does not exist</p>
+		<img src="plateNotFound.jpg" alt="OKPlate Logo" style="width:30%"; class="w3-padding-16">
+	</li>
+	<li>
+		<p>INVALID - The entered or captured plate has been recorded as Stolen - contact authorities </p>
+		<img src="stolenPlate.jpg" alt="OKPlate Logo" style="width:30%"; class="w3-padding-16">
+	</li>
+	<li>
+		<p>INVALID - The entered or catpture plate exists but is attached to the Wrong Car (different registration)</p>
+		<img src="plateWrongCar.jpg" alt="OKPlate Logo" style="width:30%"; class="w3-padding-16">
+		<p>Note: This feature is avaiable only when the car and plate image is uploaded or captured and the system can detect the car make</p>
+	</li>
+	</ul>
+  </div>
+</div>
+<hr>
+<div class="w3-cell-row">
+  <div class="w3-cell w3-container">
+	<h3>Terms and Conditions</h3>
+	<p>OKPlate! has been created as part of a university subject and is not intended to be used in a commercial arrangement.</p>
+	<p>All information sourced is from public services/sites.  No intention is made to distrust other enterprises.</p>
+	<p>All feedback is welcome! - OKPlate!@deakin.com.au</p>
+	<br>
+  </div>
+  
+</div>  
+<hr>
+</div>
+
+<footer class="w3-container w3-theme w3-bottom">
+  <h3>&nbsp;&nbsp;Copyright &copy; 2018 OKPlate!</h3>
+</footer>
+
+<script>
+closeSidebar();
+function openSidebar() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function closeSidebar() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+</body>
+</html>

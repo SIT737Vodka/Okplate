@@ -1,8 +1,8 @@
 var express = require("express");
 var bodyParser = require('body-parser');
 var app = express();
-var fs = require('fs'); // reuqire this to prepare files
-app.set('view engine', 'ejs');  // reuqire this to render ejs components
+var fs = require('fs'); // require this to prepare files
+app.set('view engine', 'ejs');  // require this to render ejs components
 
 // we set the port pro-grammatically, in case we need to change it later
 // or we can "set PORT=5000" on command line
@@ -34,7 +34,7 @@ app.post("/login",function(request,response){
  var con = mysql.createConnection({
    host: "localhost",
    user: "root",
-   // need to extract the user id and password into seprate file 
+   // need to extract the user id and password into separate file 
    password: "richard1",
    database: "users"
  });
@@ -53,23 +53,23 @@ app.post("/login",function(request,response){
             else
             {console.log("User: " + user + " not found");
 
-    //req.session.valid = true;  ... could set a session here and use jaavscript in html to check session variable in html
+    //req.session.valid = true;  ... could set a session here and use javascript in html to check session variable in html
 
     //  can use the following to redirect i.e. send html file to browser 
-    //response.sendFile(__dirname + '/public/index.html');  //yes this works
+    //response.sendFile(__dirname + '/public/OKPlateLogin.html');  //yes this works
     
-    //set the message for the esj(html) component to display message
-    response.render(__dirname + '/public/index.ejs', {message: 'Incorrect Login! Please retry'});
+    //set the message for the ejs(html) component to display message
+    response.render(__dirname + '/public/OKPlateLogin.ejs', {message: 'Incorrect Login! Please retry'});
      }
   });
  });
 });
 
-// the below route is there if browser rereshed on /login
+// the below route is there if browser refreshed on /login
 app.get("/login",function(request,response){
     var data=request.body;
     console.log('Get requested, here is the data :'+data)
-    response.sendFile(__dirname + '/public/index.html'); 
+    response.sendFile(__dirname + '/public/OKPlateLogin.html'); 
 })
 
 //start the app and listen to the port
