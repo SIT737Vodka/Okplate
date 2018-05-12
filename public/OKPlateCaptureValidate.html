@@ -11,10 +11,12 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<!-- Latest compiled JavaScript -->		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src=".\env.js"></script>
 		<link rel="stylesheet" type="text/css" href="OKPlate.css">
 		<link rel="stylesheet" type="text/css" href="OKPlateMob1.css">
-		<link rel="stylesheet" type="text/css" href="OKPlateMob.css">
+        <link rel="stylesheet" type="text/css" href="OKPlateMob.css">
+        <link rel="stylesheet" type="text/css" href="ImageUpload.css">
 	</head>
     <body>	
 		<div id="wrapper">	
@@ -87,11 +89,31 @@
 				  <div class="w3-cell w3-container">
 					<h2>Capture & Validate Plate</h2>
 					<br>
-					<p>1. Select <b><i>Capture Image </i></b>button to launch camera.</p>
-					<p>2. OKPlate! will automatically determine plate number, validate and display result.</p>
-				 
-				  <br>
-				  <button> Capture Image</button>
+					<p>1. Select <b><i>Capture Image </i></b>to launch camera.</p>
+					<p>2. Select <b><i>Validate Image </i></b>to process.</p>
+					<p>3. OKPlate! will automatically determine plate number, validate and display result.</p>
+
+                  <form id="captureimage" enctype="multipart/form-data">
+					<div id='img_contain'>
+						<img id="output" align='middle' src=".\images\noimage.png" alt="upload image of rego" title=''/>
+					</div>
+					<br>
+							<label for='username'>Capture Image:</label><br>
+							<input type="file" class='btn btn-default' name = "image" id="file" accept="image/*" capture="camera" onchange="loadFile(event)" required />
+						<script>
+  							var loadFile = function(event) {
+    						var output = document.getElementById('output');
+							output.src = URL.createObjectURL(event.target.files[0]);
+							$("#result").html('');
+							$("body").css("cursor", "default");
+  						};
+                        </script>
+                        <br>
+		        <button type='submit' class='btn btn-default' name='submitButton2' id="submitButton2">Validate Image</button>
+				<br>
+				<br>
+				<p id=result></p>
+			</form>
 				  </div> 
 				</div> 
 				<hr>
