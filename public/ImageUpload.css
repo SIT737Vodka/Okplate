@@ -1,0 +1,21 @@
+
+#img_contain{
+  border:1px solid grey;
+  margin-top:10px;
+  width:520px;
+  
+}
+
+#image{
+  margin-left:7px;
+  padding:10px;
+  
+}
+#output{
+  height:320px;
+  width:auto;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  padding:5px;
+}

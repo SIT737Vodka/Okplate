@@ -29,14 +29,14 @@ const multipartMiddleware = multipart();
 
 //Cloudinary & OCR Add-on powered by Googlevision API (Need to make a new account before submitting this)
 cloudinary.config({
-    cloud_name: 'dgque5s6r',
-    api_key: '619334687283924',
-    api_secret: '6HQ8h1PCHPf6TEyI33dUJ9q-mIw'
+    cloud_name: 'dxxgal5an',
+    api_key: '554961378632726',
+    api_secret: 'WKz8e-Q-cjXm-YXYzweZms8WhtM'
 });
 
 //POST method for Image Recognition of REGO to Vicroads
-app.post('/upload', multipartMiddleware, function(req, res) {
-  cloudinary.v2.uploader.upload(req.files.image.path,
+app.post('/upload', multipartMiddleware, function(request, response) {
+  cloudinary.v2.uploader.upload(request.files.image.path,
     {
       ocr: "adv_ocr"
       }, function(error, result) {
@@ -54,93 +54,120 @@ app.post('/upload', multipartMiddleware, function(req, res) {
 
           // Puppeteer for automation and scrapping of data from Vicroads 
           let scrape = async () => {
-            const browser = await puppeteer.launch({headless: true});
+
+   
+            const browser = await puppeteer.launch({headless:true});
             const page = await browser.newPage();
-        
+     try {
             await page.goto('https://www.vicroads.vic.gov.au/registration/buy-sell-or-transfer-a-vehicle/buy-a-vehicle/check-vehicle-registration/vehicle-registration-enquiry?utm_source=VR-checkrego&utm_medium=button&utm_campaign=VR-checkrego',{waitUntil: 'networkidle2'});
+     }
+     catch(error){   
+         console.log('could not access Vicroads website, try again later');
+     }
+     try {
             await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",rego);
+     }
+     catch(error){   
+         console.log('Unexpected when typing rego');
+     }
             try {
-                await page.click("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_btnSearch"); // Click the search button to submit
-                await page.waitForNavigation({timeout: 5000,waitUntil: 'networkidle0',});
+             await page.click("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_btnSearch"); // Click the search button to submit
+             await page.waitForNavigation({timeout: 10000,waitUntil: 'networkidle0',});
+             console.log('waiting for vicroads');      
+         }   
+             catch(error){   
+             console.log('timed out, did not retrieve data from vicroads ontime');
+         }
+     
+        
+         const result = await page.evaluate(() => {
+          
+            let data = []; // Create an empty array that will store our data
+            let elements = document.querySelectorAll('.detail-module-content'); //Selects all Vehicle Details
+ 
+    
+            for (var element of elements){ // Loop through each Vehicle Detail
+                let RegoNo = element.childNodes[1].children[1].innerText; // Select the Regno
+                let Status = element.childNodes[3].children[1].innerText; // Select the Status and Expiry Date
+                let Vehicle = element.childNodes[5].children[1].innerText; // Select the Vehicle
+                let Vin = element.childNodes[7].children[1].innerText; // Select the VIN
+    
+                data.push({RegoNo,Status,Vehicle,Vin}); // Push an object with the data onto our array
             }
-                catch(error){   
-                console.log('timed out');
-            }
+    
+            return data; // Return our data arraylet strValue = JSON.stringify(Value[0]);
+            let jsonValue = JSON.parse(strValue);
+            let strStatus = JSON.stringify(jsonValue.Status);
+        });
         
-            const result = await page.evaluate(() => {
-                let data = []; // Create an empty array that will store our data
-                let elements = document.querySelectorAll('.detail-module-content'); 
-        
-                for (var element of elements){ // Loop through each Vehicle Detail
-                  let RegoNo = element.childNodes[1].children[1].innerText; // Select the Regno
-                  let Status = element.childNodes[3].children[1].innerText; // Select the Status and Expiry Date
-                  let Vehicle = element.childNodes[5].children[1].innerText; // Select the Vehicle
-                  let Vin = element.childNodes[7].children[1].innerText; // Select the VIN
-      
-                  data.push({RegoNo,Status,Vehicle,Vin}); // Push an object with the data onto our array
-              }
-        
-                return data; // Return our data array
-            });
-        
-            browser.close();
+            await browser.close();
             return result; // Return the data
         };
         
+
         scrape().then((Value) => {
        
-          if (Value == '') {
-              console.log('Rego does not exist, please try again');
-              res.send('Rego does not exist, please try again');
-          } else {
-              let strValue = JSON.stringify(Value[0]);
-              let jsonValue = JSON.parse(strValue);
-              
-              let strRegoNo = JSON.stringify(jsonValue.RegoNo);
-              let strStatus = JSON.stringify(jsonValue.Status);
-              let strVehicle = JSON.stringify(jsonValue.Vehicle);
-              let strVin = JSON.stringify(jsonValue.Vin);
-  
-           if (strStatus.includes('Current') == true) { 
-      
-              console.log('Active');
-              res.send('Rego is ACTIVE' + strRegoNo +  + strStatus + strVehicle + strVin);
-              
-              console.log(strRegoNo);
-              console.log(strStatus);
-              console.log(strVehicle);
-              console.log(strVin);   
-  
-          } else if (strStatus.includes('Cancelled') == true){
+            if (Value == '') {
+                let imgInvalidPlate = '<img src=.\\images\\plateNotFound.jpg>'
+        
+                console.log('Rego does not exist, please try again');
+                response.send(imgInvalidPlate +'</br>'+ '</br>'+ '<b>' + rego +' Rego does not exist, please try again</b>'+'</br>');
+            } else {
+                let strValue = JSON.stringify(Value[0]);
+                let jsonValue = JSON.parse(strValue);
+        
+                let strRegoNo = (jsonValue.RegoNo);
+                let strStatus = JSON.stringify(jsonValue.Status);
+                let strVehicle =(jsonValue.Vehicle);
+                let strVin = (jsonValue.Vin);
+                expDate = strStatus.slice(strStatus.lastIndexOf('-') + 2,strStatus.length - 1);
+                strExpDate = expDate.replace('///g','.');
+               
+             if (strStatus.includes('Current') == true) { 
+                 
+                console.log('Active');
+                let imgValidPlate = '<img src=.\\images\\validPlate.jpg>'
+                
+                response.send(imgValidPlate +'</br>'+ '</br>'+'<b>Rego is ACTIVE</b>'+'</br>' + '</br>' + 'Registration No: ' + strRegoNo + '</br>' + 'Expiry Date: ' + strExpDate  + '</br>' + 'Vehicle: ' + strVehicle  + '</br>' + 'Vin No: ' + strVin);
              
-              console.log('Cancelled');  
-              res.send('Rego is CANCELLED' + strRegoNo +  + strStatus + strVehicle + strVin);
-            
-              console.log(strRegoNo);
-              console.log(strStatus);
-              console.log(strVehicle);
-              console.log(strVin);   
-          } else if (strStatus.includes('Expired') == true){
+                console.log(strRegoNo);
+                console.log(strStatus);
+                console.log(strVehicle);
+                console.log(strVin);   
+        
+            } else if (strStatus.includes('Cancelled') == true){
+               
+                console.log('Cancelled');  
+                response.send(imgValidPlate +'</br>'+ '</br>'+'<b>Rego is CANCELLED</b>'+'</br>' + '</br>' + 'Registration No: ' + strRegoNo + '</br>' + 'Expiry Date: ' + strExpDate  + '</br>' + 'Vehicle: ' + strVehicle  + '</br>' + 'Vin No: ' + strVin);
               
-             console.log('Expired');
-             res.send('Rego has EXPIRED' + strRegoNo +  + strStatus + strVehicle + strVin);
-             
-             console.log(strRegoNo);
-             console.log(strStatus);
-             console.log(strVehicle);
-             console.log(strVin);   
-          } else if (strStatus.includes('Suspended') == true){
-  
-              console.log('Suspended');  
-              res.send('Rego is SUSPENDED' + strRegoNo +  + strStatus + strVehicle + strVin);
-              
-              console.log(strRegoNo);
-              console.log(strStatus);
-              console.log(strVehicle);
-              console.log(strVin);  
-          }
-      }
-  });
+                console.log(strRegoNo);
+                console.log(strStatus);
+                console.log(strVehicle);
+                console.log(strVin);   
+            } else if (strStatus.includes('Expired') == true){
+                
+               console.log('Expired');
+               response.send(imgValidPlate +'</br>'+ '</br>'+'<b>Rego is EXPIRED</b>'+'</br>' + '</br>' + 'Registration No: ' + strRegoNo + '</br>' + 'Expiry Date: ' + strExpDate  + '</br>' + 'Vehicle: ' + strVehicle  + '</br>' + 'Vin No: ' + strVin);
+               
+               console.log(strRegoNo);
+               console.log(strStatus);
+               console.log(strVehicle);
+               console.log(strVin);   
+            } else if (strStatus.includes('Suspended') == true){
+        
+                console.log('Suspended');  
+                response.send(imgValidPlate +'</br>'+ '</br>'+'<b>Rego is SUSPENDED</b>'+'</br>' + '</br>' + 'Registration No: ' + strRegoNo + '</br>' + 'Expiry Date: ' + strExpDate  + '</br>' + 'Vehicle: ' + strVehicle  + '</br>' + 'Vin No: ' + strVin);
+                
+                console.log(strRegoNo);
+                console.log(strStatus);
+                console.log(strVehicle);
+                console.log(strVin);  
+            }
+        }
+        });
+
+
+
         }
        
       });
@@ -149,25 +176,41 @@ app.post('/upload', multipartMiddleware, function(req, res) {
   
 
   //POST method to key in REGO to Vicroads
-  app.post("/uploadrego",function(request,response){
+  app.get("/uploadrego",function(request,response){
   
     const puppeteer = require('puppeteer');
-
+    let plate1 = String(request.query.plate1);
+    console.log(plate1);
+   
+  
     // Puppeteer for automation and scrapping of data from Vicroads 
     let scrape = async () => {
 
-       const browser = await puppeteer.launch({headless: true});
-       const page = await browser.newPage();
    
+       const browser = await puppeteer.launch({headless:true});
+       const page = await browser.newPage();
+try {
        await page.goto('https://www.vicroads.vic.gov.au/registration/buy-sell-or-transfer-a-vehicle/buy-a-vehicle/check-vehicle-registration/vehicle-registration-enquiry?utm_source=VR-checkrego&utm_medium=button&utm_campaign=VR-checkrego',{waitUntil: 'networkidle2'});
-       await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",'ABC123');
+}
+catch(error){   
+    console.log('could not access Vicroads website, try again later');
+}
+try {
+       await page.type("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_VehicleSearch_RegistrationNumberCar_RegistrationNumber_CtrlHolderDivShown",plate1);
+}
+catch(error){   
+    console.log('Unexpected when typing rego');
+}
        try {
         await page.click("input#ph_pagebody_0_phthreecolumnmaincontent_1_panel_btnSearch"); // Click the search button to submit
-        await page.waitForNavigation({timeout: 5000,waitUntil: 'networkidle0',});
-    }
+        await page.waitForNavigation({timeout: 10000,waitUntil: 'networkidle0',});
+        console.log('waiting for vicroads');      
+    }   
         catch(error){   
-        console.log('timed out');
+        console.log('timed out, did not retrieve data from vicroads ontime');
     }
+
+
 
        const result = await page.evaluate(() => {
           
@@ -191,27 +234,35 @@ app.post('/upload', multipartMiddleware, function(req, res) {
    
        await browser.close();
        return result; // Return the data
-   };
+    
 
+   };
+    
    scrape().then((Value) => {
        
     if (Value == '') {
+        let imgInvalidPlate = '<img src=.\\images\\plateNotFound.jpg>'
+
         console.log('Rego does not exist, please try again');
-        res.send('Rego does not exist, please try again');
+        response.send(imgInvalidPlate +'</br>'+ '</br>'+'<b>Rego does not exist, please try again</b>'+'</br>');
     } else {
         let strValue = JSON.stringify(Value[0]);
         let jsonValue = JSON.parse(strValue);
-        
-        let strRegoNo = JSON.stringify(jsonValue.RegoNo);
+
+        let strRegoNo = (jsonValue.RegoNo);
         let strStatus = JSON.stringify(jsonValue.Status);
-        let strVehicle = JSON.stringify(jsonValue.Vehicle);
-        let strVin = JSON.stringify(jsonValue.Vin);
-
+        let strVehicle =(jsonValue.Vehicle);
+        let strVin = (jsonValue.Vin);
+        expDate = strStatus.slice(strStatus.lastIndexOf('-') + 2,strStatus.length - 1);
+        strExpDate = expDate.replace('///g','.');
+       
      if (strStatus.includes('Current') == true) { 
-
+         
         console.log('Active');
-        res.send('Rego is ACTIVE' + strRegoNo +  + strStatus + strVehicle + strVin);
+        let imgValidPlate = '<img src=.\\images\\validPlate.jpg>'
         
+        response.send(imgValidPlate +'</br>'+ '</br>'+'<b>Rego is ACTIVE</b>'+'</br>' + '</br>' + 'Registration No: ' + strRegoNo + '</br>' + 'Expiry Date: ' + strExpDate  + '</br>' + 'Vehicle: ' + strVehicle  + '</br>' + 'Vin No: ' + strVin);
+     
         console.log(strRegoNo);
         console.log(strStatus);
         console.log(strVehicle);
@@ -220,7 +271,7 @@ app.post('/upload', multipartMiddleware, function(req, res) {
     } else if (strStatus.includes('Cancelled') == true){
        
         console.log('Cancelled');  
-        res.send('Rego is CANCELLED' + strRegoNo +  + strStatus + strVehicle + strVin);
+        response.send(imgValidPlate +'</br>'+ '</br>'+'<b>Rego is CANCELLED</b>'+'</br>' + '</br>' + 'Registration No: ' + strRegoNo + '</br>' + 'Expiry Date: ' + strExpDate  + '</br>' + 'Vehicle: ' + strVehicle  + '</br>' + 'Vin No: ' + strVin);
       
         console.log(strRegoNo);
         console.log(strStatus);
@@ -229,7 +280,7 @@ app.post('/upload', multipartMiddleware, function(req, res) {
     } else if (strStatus.includes('Expired') == true){
         
        console.log('Expired');
-       res.send('Rego has EXPIRED' + strRegoNo +  + strStatus + strVehicle + strVin);
+       response.send(imgValidPlate +'</br>'+ '</br>'+'<b>Rego is EXPIRED</b>'+'</br>' + '</br>' + 'Registration No: ' + strRegoNo + '</br>' + 'Expiry Date: ' + strExpDate  + '</br>' + 'Vehicle: ' + strVehicle  + '</br>' + 'Vin No: ' + strVin);
        
        console.log(strRegoNo);
        console.log(strStatus);
@@ -238,7 +289,7 @@ app.post('/upload', multipartMiddleware, function(req, res) {
     } else if (strStatus.includes('Suspended') == true){
 
         console.log('Suspended');  
-        res.send('Rego is SUSPENDED' + strRegoNo +  + strStatus + strVehicle + strVin);
+        response.send(imgValidPlate +'</br>'+ '</br>'+'<b>Rego is SUSPENDED</b>'+'</br>' + '</br>' + 'Registration No: ' + strRegoNo + '</br>' + 'Expiry Date: ' + strExpDate  + '</br>' + 'Vehicle: ' + strVehicle  + '</br>' + 'Vin No: ' + strVin);
         
         console.log(strRegoNo);
         console.log(strStatus);
