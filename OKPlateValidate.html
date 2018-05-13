@@ -12,6 +12,8 @@
 		<!-- Latest compiled JavaScript -->		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src=".\env.js"></script>
+		<!-- CSS-->
 		<link rel="stylesheet" type="text/css" href="OKPlate.css">
 		<link rel="stylesheet" type="text/css" href="OKPlateMob1.css">
 		<link rel="stylesheet" type="text/css" href="OKPlateMob.css">
@@ -21,8 +23,8 @@
 			<div class="row">
 				<div class="col-md-2">
 					<br>
-					<a href="OKPlateHome.html">
-						<img src="validPlate.jpg" alt="OKPlate Logo" width="220" height="110" class="w3-padding-12">
+					<a href="Index.html">
+						<img src=".\images\validPlate.jpg" alt="OKPlate Logo" width="220" height="110" class="w3-padding-12">
 					</a>
 				</div>
 				<div class="col-md-10">
@@ -90,31 +92,26 @@
 						<li><p>Enter a vehicle type and plate number to validate</p>
 						</li>
 						</ul>
-						<br>
-						<form action='OKPlateValidateMob.html' method='post'>               
+						<br>              
 						<div class='form-group'>
-							<label for='plate'>Vehicle type</label>	<br>
-							<input type="radio" name="VehicleType" value="car" checked> Car/Truck&nbsp;
-							<input type="radio" name="VehicleType" value="cycle"> Motorcycle&nbsp;
-							<input type="radio" name="VehicleType" value="trailer"> Trailer
-							<br>
-							<br>
 							<label for='plate'>Plate Number</label>
-							<input type='text' class='form-control' name='plate' maxlength="6">
+							<input type='text' class='form-control' name='plate1' maxlength="6" id="plate1">
 							<p> E.g. ABC123. Combination of Letters and Numbers only. Must be between 1 and 6 characters in length.</p>
 								
 						</div>
-						<button type='submit' class='btn btn-default' name='submit'>Submit</button>
-						</form>
+						<button type='submitButton' class='btn btn-default' name='submit' id="submitButton">Submit</button>
+						<br>
+						<br>
+							<p id=result></p>
 						</div>
 					</div>  
 					<hr>
 					<div class="w3-cell-row">
 					  <div class="w3-cell w3-container">
 						<h4>Validation results include:</h4>
-						<img src="validPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
-						<img src="plateNotFound.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
-						<img src="stolenPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
+						<img src=".\images\validPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
+						<img src=".\images\plateNotFound.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
+						<img src=".\images\stolenPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
 					  </div>
 					</div>
 					<br>

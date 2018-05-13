@@ -9,20 +9,22 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<!-- Latest compiled JavaScript -->		
+		<!-- Latest compiled JavaScript -->	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src=".\env.js"></script>
+		<!-- CSS-->
 		<link rel="stylesheet" type="text/css" href="OKPlate.css">
 		<link rel="stylesheet" type="text/css" href="OKPlateMob1.css">
 		<link rel="stylesheet" type="text/css" href="OKPlateMob.css">
+		<link rel="stylesheet" type="text/css" href="ImageUpload.css">
 	</head>
-    <body>	
+    <body>
 		<div id="wrapper">	
 			<div class="row">
 				<div class="col-md-2">
 					<br>
-					<a href="OKPlateHome.html">
-						<img src="validPlate.jpg" alt="OKPlate Logo" width="220" height="110" class="w3-padding-12">
+					<a href="Index.html">
+						<img src=".\images\validPlate.jpg" alt="OKPlate Logo" width="220" height="110" class="w3-padding-12">
 					</a>
 				</div>
 				<div class="col-md-10">
@@ -88,24 +90,43 @@
 				<h2>Upload & Validate Plate</h2>
 				<br>
 				<p>1. Select <b><i>Browse</i></b> to upload plate image</p>
-				<p>2. OKPlate! will automatically determine plate number, validate and display result.</p>
-			  <form action='login.php' method='post'>               
+				<p>2. Select <b><i>Validate Image </i></b>to process.</p>
+				<p>3. OKPlate! will automatically determine plate number, validate and display result.</p>
+
 				<div class='form-group'>
-					<label for='username'>Browse:</label>
-					<input type='text' class='form-control' name='username'>
+		
+					<form id="uploadimage" enctype="multipart/form-data">
+					<div id='img_contain'>
+						<img id="output" align='middle' src=".\images\noimage.png" alt="upload image of rego" title=''/>
+					</div>
+					<br>
+							<label for='username'>Browse:</label><br>
+							<input type="file" class='btn btn-default' name = "image" id="file" accept="image/*" onchange="loadFile(event)" required />
+						<script>
+  							var loadFile = function(event) {
+    						var output = document.getElementById('output');
+							output.src = URL.createObjectURL(event.target.files[0]);
+							$("#result").html('');
+							$("body").css("cursor", "default");
+  						};
+						</script>
+							
 				</div>
-				<button type='submit' class='btn btn-default' name='submit'>Validate Image</button>
-				</form>
+				<button type='submit' class='btn btn-default' name='submitButton2' id="submitButton2">Validate Image</button>
+				<br>
+				<br>
+				<p id=result></p>
+			</form>
 			  </div> 
 			</div> 
 			<hr>
 			<div class="w3-cell-row">
 			  <div class="w3-cell w3-container">
 				<h4>Validation results include:</h4>
-				<img src="validPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
-				<img src="plateNotFound.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
-				<img src="plateWrongCar.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
-				<img src="stolenPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
+				<img src=".\images\validPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
+				<img src=".\images\plateNotFound.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
+				<img src=".\images\plateWrongCar.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
+				<img src=".\images\stolenPlate.jpg" alt="OKPlate Logo" style="width:20%"; class="w3-padding-12">
 			  </div>
 			</div>
 			<br>
