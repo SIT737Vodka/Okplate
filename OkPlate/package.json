@@ -1,0 +1,31 @@
+{
+  "name": "okplate",
+  "version": "0.1.0",
+  "description": "Registration plate recognition app",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "cloudinary": "^1.11.0",
+    "connect-multiparty": "^2.1.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "log": "^1.4.0",
+    "logger": "0.0.1",
+    "puppeteer": "^1.3.0",
+    "request": "^2.85.0"
+  },
+  "author": "ANSLEY LAM & RICHARD MCGANN",
+  "license": "MIT",
+  "main": "web-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SIT737Vodka/Okplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SIT737Vodka/Okplate/issues"
+  },
+  "homepage": "https://github.com/SIT737Vodka/Okplate#readme"
+}
