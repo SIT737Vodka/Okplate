@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OKPlate! Mobile Site</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3mobile.css"> -->
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="OKPlateMob1.css">
+<link rel="stylesheet" type="text/css" href="OKPlateMob.css">
+<script src=".\env.js"></script>
+</head>
+<body style="max-width:600px">
+
+<nav class="w3-sidebar w3-bar-block w3-card" id="mySidebar">
+<div class="w3-container w3-theme-d2">
+  <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-small"><sup class="w3-tiny">close</sup></span>
+  <div class="w3-padding-small">
+  <img src=".\images\plateMenu.JPG" alt="OKPlate Logo" style="width:65%" >
+  </div>
+</div>
+<a class="w3-bar-item w3-button" href="OKPlateLoginMob">Capture & Validate Plate <i>(Subscriber)</i></a>
+<a class="w3-bar-item w3-button" href="OKPlateValidateMob.html">Enter & Validate Plate <i>(Public)</i></a>
+<a class="w3-bar-item w3-button" href="OKPlateLinksMob.html">Links</a>
+<a class="w3-bar-item w3-button" href="OKPlateAboutUsMob.html">About Us</a>
+<a class="w3-bar-item w3-button" href="OKPlateLoginMob">Login</a>
+<a class="w3-bar-item w3-button" href="OKPlateLogoutMob">Logout</a>
+</nav>
+
+<header class="w3-bar w3-card w3-theme">
+  <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+  <a href="OKPlateHomeMob.html"> 
+  <img src=".\images\validPlateMenu.JPG" alt="OKPlate Logo" style="width:30%"; class="w3-padding-16">
+  </a>
+  <h1 class="w3-bar-item">OKPlate!</h1>
+  <sup class="w3-bar-item">&nbsp;online plate validation</sup> 
+</header>
+
+<div class="w3-container">
+<hr>
+<div class="w3-cell-row">
+					  <div class="w3-cell w3-container">
+						<h2>Enter & Validate Plate number</h2>
+						<br>
+						<div class='form-group'>
+							<label for='plate'><br>Plate Number</label>
+							<input type='text' class='form-control' name='plate1' maxlength="6" id="plate1">
+							<p> E.g. ABC123. Combination of Letters and Numbers only. Must be between 1 and 6 characters in length.</p>
+						</div>
+						<button type='submitButton' class='btn btn-default' name='submit' id="submitButton">Submit</button>
+						<br>
+						<br>
+							<p id=result></p>
+						</div>
+					</div> 
+<hr>
+<div class="w3-cell-row">
+  <div class="w3-cell w3-container">
+    <h4>Validation results include:</h4>
+	<img src=".\images\validPlate.JPG" alt="OKPlate Logo" style="width:23%"; class="w3-padding-12">
+	<img src=".\images\plateNotFound.JPG" alt="OKPlate Logo" style="width:23%"; class="w3-padding-12">
+    <img src=".\images\Cancelled.JPG" alt="OKPlate Logo" style="width:23%"; class="w3-padding-12">
+  </div>
+</div>
+<br>
+<hr>
+</div>
+
+<footer class="w3-container w3-theme w3-bottom">
+  <h3>&nbsp;&nbsp;Copyright &copy; 2018 OKPlate!</h3>
+</footer>
+
+<script>
+closeSidebar();
+function openSidebar() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function closeSidebar() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+</body>
+</html>

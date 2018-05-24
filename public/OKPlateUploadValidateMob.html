@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<title>OKPlate! Mobile Site</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3mobile.css"> -->
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="OKPlateMob1.css">
+<link rel="stylesheet" type="text/css" href="OKPlateMob.css">
+
+<body style="max-width:600px">
+
+<nav class="w3-sidebar w3-bar-block w3-card" id="mySidebar">
+<div class="w3-container w3-theme-d2">
+  <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-small"><sup class="w3-tiny">close</sup></span>
+  <div class="w3-padding-small">
+  <img src=".\images\plateMenu.JPG" alt="OKPlate Logo" style="width:65%" >
+  </div>
+</div>
+<a class="w3-bar-item w3-button" href="OKPlateLoginMob">Capture & Validate Plate <i>(Subscriber)</i></a>
+<a class="w3-bar-item w3-button" href="OKPlateValidateMob.html">Enter & Validate Plate <i>(Public)</i></a>
+<a class="w3-bar-item w3-button" href="OKPlateLinksMob.html">Links</a>
+<a class="w3-bar-item w3-button" href="OKPlateAboutUsMob.html">About Us</a>
+<a class="w3-bar-item w3-button" href="OKPlateLoginMob">Login</a>
+<a class="w3-bar-item w3-button" href="OKPlateLogoutMob">Logout</a>
+</nav>
+
+<header class="w3-bar w3-card w3-theme">
+  <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+  <a href="OKPlateHomeMob.html"> 
+  <img src=".\images\validPlateMenu.JPG" alt="OKPlate Logo" style="width:30%"; class="w3-padding-16">
+  </a>
+  <h1 class="w3-bar-item">OKPlate!</h1>
+  <sup class="w3-bar-item">&nbsp;online plate validation</sup> 
+</header>
+
+<div class="w3-container">
+<hr>
+<div class="w3-cell-row">
+  <div class="w3-cell w3-container">
+    <h3>Upload & Validate Plate</h3>
+    <p>1. Select <b><i>Browse</i></b> to upload plate image</p>
+	<p>2. OKPlate! will automatically determine plate number, validate and display result.</p>
+  <form action='login.php' method='post'>               
+	<div class='form-group'>
+		<label for='username'>Browse:</label>
+		<input type='text' class='form-control' name='username'>
+	</div>
+	<button type='submit' class='btn btn-default' name='submit'>Validate Image</button>
+	</form>
+  </div> 
+</div> 
+<hr>
+<div class="w3-cell-row">
+  <div class="w3-cell w3-container">
+    <h4>Validation results include:</h4>
+	<img src=".\images\validPlate.JPG" alt="OKPlate Logo" style="width:23%"; class="w3-padding-12">
+	<img src=".\images\plateNotFound.JPG" alt="OKPlate Logo" style="width:23%"; class="w3-padding-12">
+    <img src=".\images\Cancelled.JPG" alt="OKPlate Logo" style="width:23%"; class="w3-padding-12">
+  </div>
+</div>
+<br>
+<hr>
+</div>
+
+<footer class="w3-container w3-theme w3-bottom">
+  <h3>&nbsp;&nbsp;Copyright &copy; 2018 OKPlate!</h3>
+</footer>
+
+<script>
+closeSidebar();
+function openSidebar() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function closeSidebar() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+</body>
+</html>
